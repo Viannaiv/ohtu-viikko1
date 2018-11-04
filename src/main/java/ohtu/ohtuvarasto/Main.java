@@ -3,7 +3,7 @@ package ohtu.ohtuvarasto;
 public class Main {
 
     public static void main(String[] args) {
-
+        //added comment for week 1 ex. 11
         Varasto mehua = new Varasto(100.0);
         Varasto olutta = new Varasto(100.0, 20.2);
 
