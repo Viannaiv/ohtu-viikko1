@@ -31,6 +31,13 @@ public class VarastoTest {
     }
 
     @Test
+    public void uusiVarastoTyhjäKunAnnettuTilavuusVirheellinen() {
+        Varasto varasto1 = new Varasto(-10);
+
+        assertEquals(0.0, varasto1.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
     public void lisaysLisaaSaldoa() {
         varasto.lisaaVarastoon(8);
 
@@ -44,6 +51,20 @@ public class VarastoTest {
 
         // vapaata tilaa pitäisi vielä olla tilavuus-lisättävä määrä eli 2
         assertEquals(2, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void virheellinenLisaysEiMuutaSaldoa() {
+        varasto.lisaaVarastoon(-8);
+
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void liianSuuriLisaysEiYlitaTilavuutta() {
+        varasto.lisaaVarastoon(18);
+
+        assertEquals(0, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
 
     @Test
@@ -63,6 +84,53 @@ public class VarastoTest {
 
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void virheellinenMaaraEiOtaVaratosta() {
+        varasto.lisaaVarastoon(8);
+        varasto.otaVarastosta(-2);
+
+        assertEquals(2.0, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void saldoaSuurempiMaaraTyhjentaaVaraston() {
+        varasto.lisaaVarastoon(4);
+        varasto.otaVarastosta(12);
+
+        assertEquals(10.0, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void toStringToimiiOikein() {
+        varasto.lisaaVarastoon(8);
+
+        assertEquals("saldo = 8.0, vielä tilaa 2.0", varasto.toString());
+    }
+
+    @Test
+    public void vaihtoehtoinenKonstruktoriLuoOikeaSaldoisenVaraston() {
+        Varasto varasto2 = new Varasto(10, 2);
+        assertEquals(2.0, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void vaihtoehtoinenKonstruktoriLuoOikeaTilavuisenVaraston() {
+        Varasto varasto2 = new Varasto(10, 2);
+        assertEquals(10.0, varasto2.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void vaihtoehtoinenKonstruktoriLuo0TilavuisenVarastonKunTilavuusLiianPieni() {
+        Varasto varasto2 = new Varasto(-10, 2);
+        assertEquals(0.0, varasto2.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void vaihtoehtoinenKonstruktoriLuo0SaldoisenVarastonKunSaldoLiianPieni() {
+        Varasto varasto2 = new Varasto(10, -2);
+        assertEquals(0.0, varasto2.getSaldo(), vertailuTarkkuus);
     }
 
 }
