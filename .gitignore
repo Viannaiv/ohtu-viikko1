@@ -3,3 +3,7 @@
 build/
 
 .vscode/
+
+/.gradle/
+
+/.nb-gradle/

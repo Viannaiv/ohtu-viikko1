@@ -38,7 +38,7 @@ jar {
 }
 
 //JaCoCO
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
 
 //Codecov
 jacocoTestReport {
