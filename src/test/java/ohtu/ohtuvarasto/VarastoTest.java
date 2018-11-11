@@ -9,7 +9,7 @@ public class VarastoTest {
     // build failed, koska VarastoTest.java sisältää magic numbereita.
     
     Varasto varasto;
-    double vertailuTarkkuus = 0.0001;
+    //double vertailuTarkkuus = 0.0001;
 
 //    @Before
 //    public void setUp() {
